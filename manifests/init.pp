@@ -1,7 +1,7 @@
 class oidentd {
   include oidentd::base
 
-  if $use_shorewall {
+  if hiera('use_shorewall',false) {
     include shorewall::rules::identd
   }
 }

@@ -4,8 +4,8 @@ class oidentd::base {
   }
 
   file{'/etc/oidentd.conf':
-    source => [ "puppet:///modules/site-oidentd/${fqdn}/oidentd.conf",
-                "puppet:///modules/site-oidentd/oidentd.conf",
+    source => [ "puppet:///modules/site_oidentd/${::fqdn}/oidentd.conf",
+                "puppet:///modules/site_oidentd/oidentd.conf",
                 "puppet:///modules/site/oidentd.conf" ],
     require => Package['oidentd'],
     notify => Service['oidentd'],
