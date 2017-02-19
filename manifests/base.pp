@@ -1,22 +1,16 @@
+# manage all the pieces
 class oidentd::base {
   package{'oidentd':
     ensure => installed,
-  }
-
-  file{'/etc/oidentd.conf':
+  } -> file{'/etc/oidentd.conf':
     source => [ "puppet:///modules/site_oidentd/${::fqdn}/oidentd.conf",
                 "puppet:///modules/site_oidentd/oidentd.conf",
                 "puppet:///modules/oidentd/oidentd.conf" ],
-    require => Package['oidentd'],
-    notify  => Service['oidentd'],
-    owner   => root,
+    owner   => 'root',
     group   => 0,
     mode    => '0644';
-  }
-
-  service{'oidentd':
+  } ~> service{'oidentd':
     ensure    => running,
     enable    => true,
-    hasstatus => false,
   }
 }
