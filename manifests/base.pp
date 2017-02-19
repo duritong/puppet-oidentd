@@ -6,15 +6,17 @@ class oidentd::base {
   file{'/etc/oidentd.conf':
     source => [ "puppet:///modules/site_oidentd/${::fqdn}/oidentd.conf",
                 "puppet:///modules/site_oidentd/oidentd.conf",
-                "puppet:///modules/site/oidentd.conf" ],
+                "puppet:///modules/oidentd/oidentd.conf" ],
     require => Package['oidentd'],
-    notify => Service['oidentd'],
-    owner => root, group => 0, mode => 0644;
+    notify  => Service['oidentd'],
+    owner   => root,
+    group   => 0,
+    mode    => '0644';
   }
 
   service{'oidentd':
-    ensure => running,
-    enable => true,
+    ensure    => running,
+    enable    => true,
     hasstatus => false,
   }
 }
